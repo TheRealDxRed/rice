@@ -1,0 +1,192 @@
+; === WINDOWS === ;
+
+(defwindow sidebar :class "sidebar_window"
+                   :stacking "fg"
+                   :exclusive false
+                   :focusable "none"
+                   :namespace "widgets"
+                   :monitor 0
+                   :geometry (geometry :width "40px"
+                                       :height "100%"
+                                       :anchor "center left")
+  (sidebar_layout))
+
+
+
+; === WIDGETS === ;
+
+(defwidget sidebar_layout []
+  (box :class "sidebar_inner"
+       :orientation "vertical"
+       :space-evenly true
+       :valign "fill"
+    (_sidebar_status)
+    (_sidebar_dials)))
+
+(defwidget _sidebar_status []
+  (box :class "sidebar_status"
+       :orientation "vertical"
+       :space-evenly false
+       :valign "start"
+       :spacing 10
+    (_windowcount :count {activeworkspace.windows})
+    (_battery :status {EWW_BATTERY.BAT0.status}
+              :battery {EWW_BATTERY.BAT0.capacity})
+    (_time :time time)
+    (_date :time time)
+    ))
+
+(defwidget _sidebar_dials []
+  (box :class "sidebar_dials"
+       :orientation "vertical"
+       :space-evenly false
+       :valign "end"
+       :spacing 10
+    (_tray)
+    (_volume :volume {volume})
+    (_brightness :brightness {brightness})))
+
+(defwidget _metric [ icon ]
+  (box :class "metric"
+       :orientation "vertical"
+    (label :class "metric-icon"
+           :text icon
+           :halign "center")
+    (children)))
+
+(defwidget _time [ time ]
+  (_metric :icon {(time.hr == 0 || time.hr == 12) ? "󱑖" :
+                  (time.hr == 1 || time.hr == 13) ? "󱑋" :
+                  (time.hr == 2 || time.hr == 14) ? "󱑌" :
+                  (time.hr == 3 || time.hr == 15) ? "󱑍" :
+                  (time.hr == 4 || time.hr == 16) ? "󱑎" :
+                  (time.hr == 5 || time.hr == 17) ? "󱑏" :
+                  (time.hr == 6 || time.hr == 18) ? "󱑐" :
+                  (time.hr == 7 || time.hr == 19) ? "󱑑" :
+                  (time.hr == 8 || time.hr == 20) ? "󱑒" :
+                  (time.hr == 9 || time.hr == 21) ? "󱑓" :
+                  (time.hr == 10 || time.hr == 22) ? "󱑔" :
+                  "󱑕"}
+    {time.hr}
+    {time.mi}))
+
+(defwidget _date [ time ]
+  (box :class "metric"
+       :orientation "vertical"
+    "󰃭"
+    {time.da}
+    {time.mo}))
+
+(defwidget _battery [ battery status ]
+  (box :class "battery_container"
+       :orientation "vertical"
+       :space-evenly false
+       :valign "start"
+    (_metric :icon {battery < 10 ? (status == "Charging" ? "󰢜" : "󰁺") :
+                    battery < 20 ? (status == "Charging" ? "󰂆" : "󰁻") :
+                    battery < 30 ? (status == "Charging" ? "󰂇" : "󰁼") :
+                    battery < 40 ? (status == "Charging" ? "󰂈" : "󰁽") :
+                    battery < 50 ? (status == "Charging" ? "󰢝" : "󰁾") :
+                    battery < 60 ? (status == "Charging" ? "󰂉" : "󰁿") :
+                    battery < 70 ? (status == "Charging" ? "󰢞" : "󰂀") :
+                    battery < 80 ? (status == "Charging" ? "󰂊" : "󰂁") :
+                    battery < 90 ? (status == "Charging" ? "󰂋" : "󰂂") :
+                    (status == "Charging" ? "󰂅" : "󰁹")}
+      {EWW_BATTERY.BAT0.capacity})
+    ))
+
+(defwidget _volume [ volume ]
+  (box :class "volume_container"
+       :orientation "vertical"
+       :space-evenly false
+       :valign "start"
+    (_metric :icon {volume.muted ? "󰖁" :
+                    (volume.level == 0 ? "󰕿" :
+                     volume.level < 50 ? "󰖀" :
+                     "󰕾")}
+      {volume.level})))
+
+(defwidget _brightness [ brightness ]
+  (box :class "brightness_container"
+       :orientation "vertical"
+       :space-evenly false
+       :valign "start"
+    (_metric :icon {brightness >= 90 ? "󰃠" :
+                    brightness >= 80 ? "󰃟" :
+                    brightness >= 70 ? "󰃞" :
+                    brightness >= 60 ? "󰃝" :
+                    brightness >= 50 ? "󰃜" :
+                    brightness >= 40 ? "󰃛" :
+                    "󰃚"}
+      {brightness})))
+
+(defwidget _temperature [ temperature ]
+  (box :class "temperature_container"
+       :orientation "vertical"
+       :space-evenly false
+       :valign "start"
+    (_metric :icon {temperature < 40 ? "󰔄" :
+                    temperature < 60 ? "󰔄" :
+                    temperature < 70 ? "󰔄" :
+                    temperature < 80 ? "󰔄" :
+                    "󰔄"}
+      {temperature})))
+
+(defwidget _ram [ ram ]
+  (box :class "ram_container"
+       :orientation "vertical"
+       :space-evenly false
+       :valign "start"
+    (_metric :icon "󰘚"
+      {ram})))
+
+(defwidget _storage [ storage ]
+  (box :class "storage_container"
+       :orientation "vertical"
+       :space-evenly false
+       :valign "start"
+    (_metric :icon "󱛟"
+      {storage})))
+
+(defwidget _cpu [ cpu ]
+  (box :class "cpu_container"
+       :orientation "vertical"
+       :space-evenly false
+       :valign "start"
+    (_metric :icon "󰍛"
+      {cpu})))
+
+(defwidget _windowcount [ count ]
+  (box :class "windowcount_container"
+       :orientation "vertical"
+       :space-evenly false
+       :valign "start"
+    (_metric :icon "[󰖲]"
+      {count})))
+
+(defwidget _tray []
+  (box :class "tray"
+       :orientation "vertical"
+       :space-evenly false
+       :valign "start"
+      (systray :spacing 10
+               :orientation "vertical"
+               :space-evenly true
+               :icon-size 16
+               :prepend-new true)))
+
+
+
+; === POLLS === ;
+
+(defpoll time :interval "1s"
+  "date +'{\"da\":\"%d\",\"mo\":\"%m\",\"hr\":\"%H\",\"mi\":\"%M\",\"se\":\"%S\"}'")
+
+(defpoll volume :interval "1s"
+  'wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk \'{printf "{\\"level\\":%d,\\"muted\\":%s}", $2*100, ($3=="[MUTED]"?"true":"false")}\'')
+
+(defpoll brightness :interval "1s"
+  "brightnessctl -m | gawk -k '{print int(($3/$5)*100)}'")
+
+(defpoll activeworkspace :interval "1s"
+  "hyprctl -j activeworkspace")

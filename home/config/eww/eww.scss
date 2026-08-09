@@ -1,0 +1,51 @@
+@use "base16";
+
+* { all: unset; }
+
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 1em;
+  color: base16.$base06;
+}
+
+.sidebar_window {
+  background-color: rgba(0.0, 0.0, 0.0, 0.0);
+}
+
+.sidebar_inner {
+  margin: 0.2em;
+  border: 1px solid base16.$base03;
+  border-radius: 0.5em;
+  background-color: base16.$base00;
+}
+
+.sidebar_status {
+  margin-top: 0.6em;
+}
+
+.sidebar_dials {
+  margin-bottom: 0.6em;
+}
+
+.metric {
+  background-color: base16.$base01;
+  border-radius: 0.5em;
+  margin-left: 0.3em;
+  margin-right: 0.3em;
+}
+
+.windowtitle_container.metric {
+  -gtk-icon-transform: rotate(-90deg);
+}
+
+menu {
+  padding: 0.2em;
+  border: 1px solid base16.$base03;
+  border-radius: 0.5em;
+  background-color: base16.$base00;
+
+  menuitem:hover {
+    background-color: base16.$base01;
+  }
+}
+

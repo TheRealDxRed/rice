@@ -1,0 +1,39 @@
+{ config, pkgs, ... }:
+{
+  gtk = {
+    enable = true;
+    gtk3.extraConfig = { gtk-application-prefer-dark-theme = 1; };
+    gtk4.extraConfig = { gtk-application-prefer-dark-theme = 1; };
+    iconTheme = {
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus-Dark";
+    };
+  };
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+  };
+
+  fonts.fontconfig.enable = true;
+
+  home.sessionVariables = {
+    GIO_EXTRA_MODULES = "${pkgs.gvfs}/lib/gio/modules";
+    LIBVA_DRIVER_NAME = "radeonsi";
+    MOZ_ENABLE_WAYLAND = "1";
+    AMD_VULKAN_ICD = "RADV";
+  };
+
+  home.pointerCursor.enable = true;
+
+  home.packages = with pkgs; [
+    nerd-fonts.fira-code
+    nerd-fonts.jetbrains-mono
+    libnotify
+    glib
+    brightnessctl
+    networkmanagerapplet
+    pwvucontrol
+  ];
+}
