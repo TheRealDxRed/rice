@@ -30,11 +30,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    naersk = {
-      url = "github:nix-community/naersk";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     gruvbox-wallpapers.url = "github:AngelJumbo/gruvbox-wallpapers";
   };
 
@@ -46,7 +41,6 @@
       stylix,
       zen-browser,
       gruvbox-wallpapers,
-      naersk,
       ...
     }@inputs:
     let
