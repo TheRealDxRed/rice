@@ -18,6 +18,8 @@
       rd = "rm -rf";
 
       ff = "fastfetch";
+
+      flake = "nix flake";
     };
 
     functions = {
@@ -25,6 +27,10 @@
         fastfetch
       '';
 
+      lock = "nix flake lock";
+      build = "nix build";
+      run = "nix run";
+      develop = "nix develop -c $SHELL";
       rebuild = "sudo nixos-rebuild switch --flake path:$HOME/dev/rice#(hostname) --show-trace $argv";
 
       y = ''
