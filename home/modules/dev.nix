@@ -55,6 +55,7 @@
     uv
     stripe-cli
     file
+    ffmpeg
 
     poppler-utils
     ffmpegthumbnailer
