@@ -50,6 +50,7 @@
     HandleLidSwitch = "lock";
     HandleLidSwitchExternalPower = "lock";
     HandleLidSwitchDocked = "ignore";
+    HandlePowerKey = "sleep";
     InhibitDelayMaxSec = 5;
   };
 

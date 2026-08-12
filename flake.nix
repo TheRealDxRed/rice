@@ -49,7 +49,9 @@
         ./modules/parsec.nix
         ./modules/libreoffice.nix
         ./modules/steam.nix
-        ./modules/thunar.nix
+        # ./modules/thunar.nix
+        # ./modules/nautilus.nix
+        ./modules/nemo.nix
       ];
 
       sharedModules = [
