@@ -157,6 +157,7 @@
         env = [
           (env "HYPRCURSOR_SIZE" config.stylix.cursor.size)
           (env "XCURSOR_SIZE" config.stylix.cursor.size)
+          (env "GTK_CSD" "0")
         ];
 
         bind = [
