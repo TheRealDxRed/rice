@@ -30,4 +30,14 @@
       ];
     };
   };
+
+  # `nemo` doesn't always use XDG defaults, so we have to set it this way, too
+  xdg.terminal-exec = {
+    enable = true;
+    settings = {
+      default = [
+        "com.mitchellh.ghostty.desktop"
+      ];
+    };
+  };
 }

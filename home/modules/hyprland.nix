@@ -66,6 +66,7 @@
       exec = cmd: ''hl.dsp.exec_cmd("${cmd}")'';
       layout = msg: ''hl.dsp.layout("${msg}")'';
       window_float_toggle = "hl.dsp.window.float({action=toggle})";
+      window_fullscreen_toggle = "hl.dsp.window.fullscreen({action=toggle})";
       window_close = "hl.dsp.window.close()";
       window_drag = "hl.dsp.window.drag()";
       window_resize = "hl.dsp.window.resize()";
@@ -178,6 +179,7 @@
           (bindo "SUPER + SHIFT + mouse:272" window_resize { locked = true; })
           (bindo "SUPER + equal" (layout "colresize +conf") { locked = true; })
           (bindo "SUPER + minus" (layout "colresize -conf") { locked = true; })
+          (bindo "SUPER + SHIFT + F" window_fullscreen_toggle { locked = true; })
 
           # Workspace navigation
           (bindo "SUPER + grave" workspace_toggle_special { locked = true; })
