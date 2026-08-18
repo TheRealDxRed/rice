@@ -74,6 +74,7 @@
     alsa-utils
     sops
     age
+    sc-im
   ];
 
   programs.fish.enable = true;
