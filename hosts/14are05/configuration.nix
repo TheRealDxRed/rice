@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   networking.hostName = "14are05";
 
@@ -47,11 +47,11 @@
   # services.fprintd.enable = true;
 
   services.logind.settings.Login = {
-    HandleLidSwitch = "lock";
-    HandleLidSwitchExternalPower = "lock";
-    HandleLidSwitchDocked = "ignore";
     HandlePowerKey = "sleep";
-    InhibitDelayMaxSec = 5;
+    # HandleLidSwitch = "lock";
+    # HandleLidSwitchExternalPower = "lock";
+    # HandleLidSwitchDocked = "ignore";
+    # InhibitDelayMaxSec = 5;
   };
 
   systemd.sleep.settings.Sleep = {

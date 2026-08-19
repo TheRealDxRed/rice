@@ -85,6 +85,8 @@
       '';
       workspace_toggle_special = "hl.dsp.workspace.toggle_special(\"special\")";
 
+      lock_session = (exec "loginctl lock-session");
+
       _cycle_dsp = scrolling_cmd: monocle_cmd: ''
         function()
           local workspace = hl.get_active_special_workspace() or
@@ -163,10 +165,10 @@
 
         bind = [
           # System shortcuts
-          (bindo "SUPER + L" (exec "loginctl lock-session") {
+          (bindo "SUPER + L" lock_session {
             locked = true;
           })
-          (bindo "SUPER + SHIFT + L" (exec "loginctl lock-session") {
+          (bindo "SUPER + SHIFT + L" lock_session {
             locked = true;
           })
           (bind "SUPER + space" (exec "rofi -show drun"))
@@ -214,6 +216,9 @@
           (bindo "XF86Calculator" (exec "ghostty +new-window -e euporie --edit-mode vi notebook") {
             locked = true;
           })
+
+          # Hardware switches
+          (bindo "switch:on:Lid Switch" lock_session { locked = true; })
 
           # Screenshots
           (bind "SUPER + S" (exec "hyprshot -m active -m window"))
